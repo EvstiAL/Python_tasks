@@ -1,16 +1,21 @@
+
+
+
 class Car:
-    color: str = 'black' #Выбираем цвет автомобиля. В данном примере цвет ЧЕРНЫЙ
+    color: str = 'White' #Выбираем цвет автомобиля. В данном примере цвет ЧЕРНЫЙ
     power: int =  750 #мощность двигателя лошадиные силы
     m_topl: int = 40 #Запас бенза
     ras_topl: float = 1 #значения расхода топлива на 1 километр
     topl_isn: float = 0 #изначальное значение топлива в баке
+    seats: int = 4 #Количество сидуушек
 
-    def __init__ (self, color:str = 'white', power: int = 666, m_topl: float = 989, ras_topl = 23, topl_isn = 2):
+    def __init__ (self, color:str = 'White', power: int = 666, m_topl: float = 989, ras_topl = 23, topl_isn = 2, seats = 4):
         self.color = color
         self.power = power
         self.m_topl = m_topl
         self.ras_topl = ras_topl
         self.topl_isn = topl_isn
+        self.seats = seats
 
     def set_color(self, color):
         """
@@ -18,6 +23,8 @@ class Car:
         """
         self.color = color
         return self.color
+
+
     def get_color(self):
         """
         Даннная функция позволяет вывести на экран значение цвета, который установлен для автомобиля
@@ -71,14 +78,56 @@ class Car:
 
     def true_distance(self):
         return self.topl_isn / self.ras_topl
+    
+    def get_seats(self):
+        return self.seats
+    
+    def set_seats(self, seats):
+        self.seats = seats
+        return self.seats
+
+# проверки
+def test_init1():
+    Car(color = 'White', power = 3030, m_topl = 80, ras_topl = 4, topl_isn = 11)
+def test_init2():
+    Car(color = "White")
+def test_color1():
+    c = Car(color = 'White', power = 3030, m_topl = 80, ras_topl = 4, topl_isn = 11)
+    assert c.get_color() == 'White'
+def test_color2():
+    c = Car(color = 'White', power = 3030, m_topl = 80, ras_topl = 4, topl_isn = 11)
+    assert c.get_color() == 'White'
+    c.set_color('red')
+def test_color3():
+    c = Car(color = 'White', power = 3030, m_topl = 80, ras_topl = 4, topl_isn = 11)
+    assert c.get_color() == 'White'
+    c.set_color('red')
+
+    assert c.get_color() == 'red'
+
+def test_1():
+    c = Car()
+    assert c.get_seats() == 4
+    c.set_seats(5) 
+    assert c.get_seats() == 5
+
+#вызовы функции проверок 
+test_init2()
+test_init1()
+test_color1()
+test_color2()
+test_color3()
+test_1()
 
 
-c = Car(color = 'Grey', power = 3030, m_topl = 80, ras_topl = 4, topl_isn = 11)
 
+c = Car(color = 'White', power = 3030, m_topl = 80, ras_topl = 4, topl_isn = 11, seats = 5)
+#блок вывода результатов
 print('Цвет машины:', c.get_color())
 print('Объём бака:', c.get_fuel())
 print(f'У тебя запас топлива {c.get_fuel()} с ним можно проехать {c.true_distance()}')
-input()
+print('количество сидений')
+input('Нажмите Enter, чтобы продолжить...')
 c.set_color('Yellow')
 c.set_m_topl(90)
 print(f'Новый окрас автомобиля {c.get_color()}')
@@ -87,3 +136,5 @@ print(f'Сейчас в баке залито {c.topl_isn} литров')
 print(f'Возможно заправиться на {c.get_refill()} литров')
 c.refill(88)
 print(f'Можно проехать {c.true_distance()}')
+
+input('Нажмите Enter, чтобы продолжить...')
